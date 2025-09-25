@@ -8,8 +8,3 @@ Relational database project for aircraft incidents using R. Includes scripts for
 - `testDBLoading.PractI.R` – Script to create analysis from the database.
 - `IncidentsReport.PractI.Rmd` – Script to create chart and visual analysis formed into a PDF report.
 - `configBusinessLogic.PractI` – Script to Ccreate stored procedures for the database.
-
-## Dependencies
-- R 
-- DBI
-- RMySQL
