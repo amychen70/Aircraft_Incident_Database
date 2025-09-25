@@ -1,3 +1,19 @@
+```{r connectLibrary, echo=FALSE}
+library(DBI)
+library(RMySQL)
+library(knitr)
+library(kableExtra)
+
+conn <- dbConnect(
+  RMySQL::MySQL(),
+  dbname = ,
+  host = ,
+  port = , 
+  user = ,
+  password = 
+)
+```
+
 ## Analysis by Month
 ```{r monthAnalysis, echo=F}
 # Get Query 
