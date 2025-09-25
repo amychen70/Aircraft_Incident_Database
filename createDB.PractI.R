@@ -95,3 +95,10 @@ status <- dbExecute(conn, "
     FOREIGN KEY (reported_by) REFERENCES reportLookup(report_name)
   );
 ")
+
+##------------------------------------------------------------------------------
+## Check table existent 
+dbListTables(conn)
+
+## Disconnect 
+status <- dbDisconnect(conn)
