@@ -1,3 +1,15 @@
+library(DBI)
+library(RMySQL)
+
+conn <- dbConnect(
+  RMySQL::MySQL(),
+  dbname = ,
+  host = ,
+  port = , 
+  user = ,
+  password = 
+)
+
 ## Ensure everything is dropped before running 
 status <- dbExecute(conn, "DROP PROCEDURE IF EXISTS storeIncident")
 status <- dbExecute(conn, "DROP PROCEDURE IF EXISTS storeNewIncident")
