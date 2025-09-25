@@ -1,3 +1,18 @@
+##------------------------------------------------------------------------------
+
+library(DBI)
+library(RMySQL)
+
+conn <- dbConnect(
+  RMySQL::MySQL(),
+  dbname = ,
+  host = ,
+  port = ,
+  user = ,
+  password = ,
+)
+
+##------------------------------------------------------------------------------
 
 ## Creates a lookup table for airline // David
 status <- dbExecute(conn, "
