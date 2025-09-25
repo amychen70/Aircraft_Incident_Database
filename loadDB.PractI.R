@@ -1,5 +1,19 @@
 ##------------------------------------------------------------------------------
 
+library(DBI)
+library(RMySQL)
+
+conn <- dbConnect(
+  RMySQL::MySQL(),
+  dbname = ,
+  host = ,
+  port = , 
+  user = ,
+  password = 
+)
+
+##------------------------------------------------------------------------------
+
 url <- "https://s3.us-east-2.amazonaws.com/artificium.us/datasets/incidents.csv"
 df <- read.csv(url, stringsAsFactors = F, header = T)
 
