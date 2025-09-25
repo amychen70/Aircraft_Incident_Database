@@ -1,0 +1,80 @@
+## Analysis by Month
+```{r monthAnalysis, echo=F}
+# Get Query 
+status <- dbGetQuery(conn, 
+"SELECT incident_type, MONTH(STR_TO_DATE(date, '%d.%m.%Y')) AS Month,
+COUNT(*) AS NumIncidents
+FROM Incident
+GROUP BY Month, incident_type
+ORDER BY Month, incident_type")
+
+# Make into DF
+df <- data.frame(
+  Month = c(status$Month),
+  Type = c(status$incident_type),
+  Incidents = c(status$NumIncidents)
+)
+
+# DF to matrix 
+incidentMatrix <- xtabs(Incidents ~ Month + Type, data = df)
+
+# Months number to month names
+rownames(incidentMatrix) <- month.name 
+
+# Matrix back to DF 
+incidentDf <- as.data.frame.matrix(incidentMatrix)
+
+# Make table
+kable(incidentDf, caption = "Total Monthly Incidents by Type") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), 
+                full_width = FALSE, position = "center")
+
+```
+
+## Analysis By Airline 
+```{r airlineAnalysis, echo=F, warning=F}
+# Get Query 
+status <- dbGetQuery(conn, 
+"SELECT f.airline, 
+COUNT(*) as TotalIncident, 
+ROUND(AVG(i.delay_mins), 2) as DelayAvg
+FROM Flights as f 
+INNER JOIN Incident as i 
+ON f.fid = i.fid 
+GROUP BY f.airline")
+  
+# Make into DF
+df <- data.frame(
+  Airline = c(status$airline),
+  TotalIncident = c(status$TotalIncident),
+  DelayAvg = c(status$DelayAvg)
+)
+
+# Make table 
+kable(df, caption = "Total Incident And Average Delay Per Airline") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), 
+                full_width = FALSE, position = "center")
+
+```
+
+## Trend by Year
+```{r lineChart, echo=F}
+# Get Query
+status <- dbGetQuery(conn, 
+"SELECT YEAR(STR_TO_DATE(date, '%d.%m.%Y')) AS Year,
+COUNT(*) AS NumIncidents
+FROM Incident
+GROUP BY Year
+ORDER BY Year")
+
+# Make DF 
+df <- data.frame(Year = c(status$Year), TotalIncident = c(status$NumIncidents))
+
+# Line chart
+plot(df$Year, df$TotalIncident, main="Year vs Incidents",
+   xlab="Year ", ylab="Incidents ", pch=19, type = "b")
+```
+
+```{r disconnect, echo=F}
+status <- dbDisconnect(conn)
+```
