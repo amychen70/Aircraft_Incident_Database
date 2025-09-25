@@ -1,3 +1,15 @@
+library(DBI)
+library(RMySQL)
+
+conn <- dbConnect(
+  RMySQL::MySQL(),
+  dbname = ,
+  host = ,
+  port = , 
+  user = ,
+  password = 
+)
+
 # Drop lookout table 
 status <- dbExecute(conn, "DROP TABLE IF EXISTS Incident;")
 status <- dbExecute(conn, "DROP TABLE IF EXISTS Flights;")
