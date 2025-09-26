@@ -1,6 +1,10 @@
 # Aircraft Incident Database Project
 Relational database project for aircraft incidents using R. Includes scripts for loading, cleaning, and exploring incidents dataset. 
 
+## Collaborators
+- Mei Qi (Amy) Chen (@amychen70)
+- David Li (@daev1005)
+
 ## Files
 - `createDB.PractI.R`- Script to create the tables for database.
 - `deleteDB.PractI.R`- Script to delete tables.
